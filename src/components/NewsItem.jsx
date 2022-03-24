@@ -5,9 +5,24 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import PlaceHolderImage from '../images/SM-placeholder.png'
 
 function NewsItem(props) {
-    const { imageUrl, title, desc, link } = props
+    const { imageUrl, title, desc, link } = props;
+
+    const trimTitle = (str) => {
+        let length = 50;
+        if(str!==null){
+            return str.length > length ? str.substring(0, length - 3) + "..." : str;
+        }
+    }
+
+    const trimDesc = (str) => {
+        let length = 100;
+        if(str!==null){
+            return str.length > length ? str.substring(0, length - 3) + "..." : str;
+        }
+    }
 
     return (
         <>
@@ -15,14 +30,14 @@ function NewsItem(props) {
                 <CardMedia
                     component="img"
                     height="140"
-                    image={imageUrl}
+                    image={imageUrl !== null ? imageUrl : PlaceHolderImage}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {title}
+                        {trimTitle(title)}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {desc}
+                        {trimDesc(desc)}
                     </Typography>
                 </CardContent>
                 <CardActions>
